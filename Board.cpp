@@ -432,7 +432,7 @@ bool Board::  isrookmovelegal(char board[8][8], int ia, int ib, int fa, int fb)
 	{
 		if (fa > ia)
 		{
-			for (int i = ia + 1; i < fa; i++)
+			for (int i = ia + 1; i < fa; i++ )
 			{
 				if (board[i][fb] != '-')
 				{
