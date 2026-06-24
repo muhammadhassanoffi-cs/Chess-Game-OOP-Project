@@ -15,5 +15,5 @@ public:
 	bool ispawnmovelegal(char board[8][8], int ia, int ib, int fa, int fb);
 	void pawnpromotion(char board[8][8], char piece, int fa, int fb);
 	bool isknightmovelegal( int ia, int ib, int fa, int fb);
-	bool isrookmovelegal(char board[8][8], int ia , int ib, int fa , int fb);
+	bool isrookmovelegal(char board[8][8], int ia, int ib, int fa, int fb);
 };
