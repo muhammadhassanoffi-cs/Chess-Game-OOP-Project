@@ -1,7 +1,6 @@
 #pragma once
 #include"piece.h"
-class Pawn : public Piece {
+class Rook : public Piece {
 public:
 	bool ismoveLegal(char board[8][8], int ia, int ib, int fa, int fb) override;
-	void pawnpromotion(char board[8][8], char piece, int fa, int fb);
 };
