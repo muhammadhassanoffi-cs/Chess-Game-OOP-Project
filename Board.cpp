@@ -192,11 +192,19 @@ void Board::move()
 			validmove = isbishopmovelegal(board, ia, ib, fa, fb);
 
 		}
-		if (board[ia][ib] == 'b' || board[ia][ib] == 'B')
+		if (board[ia][ib] == 'q' || board[ia][ib] == 'Q')
 		{
-			validmove = isqueenmovelegal();
+			validmove = isqueenmovelegal(board, ia, ib, fa, fb);
 
 		}
+		if (board[ia][ib] == 'k' || board[ia][ib] == 'K')
+		{
+			validmove = isqueenmovelegal(board, ia, ib, fa, fb);
+
+		}
+
+
+
 		if (!validmove)
 		{
 			cout << "This movement of piece is not allowed " << endl;
@@ -632,4 +640,19 @@ bool Board::isbishopmovelegal(char board[8][8], int ia, int ib, int fa, int fb)
 		
 	}
 	return false;
+}
+bool Board :: isqueenmovelegal(char board[8][8], int ia, int ib, int fa, int fb)
+{
+	if (isrookmovelegal(board, ia, ib, fa, fb) == true)
+	{
+		return true;
+	}
+	else if (isbishopmovelegal(board, ia, ib, fa, fb) == true)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
