@@ -3,6 +3,7 @@
 #include"Board.h"
 #include"Pawn.h"
 #include<cctype>
+#include<cmath>
 using namespace std;
 //bool ispawnmovelegal(char board[8][8], int ia, int ib, int fa, int fb);
 //void Board :: pawnpromotion(char board[8][8], char piece, int fa, int fb);
@@ -185,6 +186,16 @@ void Board::move()
 		{
 			validmove = isrookmovelegal(board, ia, ib, fa, fb);
 		
+		}
+		if (board[ia][ib] == 'b' || board[ia][ib] == 'B')
+		{
+			validmove = isbishopmovelegal(board, ia, ib, fa, fb);
+
+		}
+		if (board[ia][ib] == 'b' || board[ia][ib] == 'B')
+		{
+			validmove = isqueenmovelegal();
+
 		}
 		if (!validmove)
 		{
@@ -521,4 +532,104 @@ bool Board::  isrookmovelegal(char board[8][8], int ia, int ib, int fa, int fb)
 	}
 	return false;
 
+}
+bool Board::isbishopmovelegal(char board[8][8], int ia, int ib, int fa, int fb)
+{
+	int a = abs(fa - ia);
+	int b = abs(fb - ib);
+	bool allow = true;
+	if (a == b)
+	{
+		if (fa < ia && fb > ib)
+		{
+			int i = ia - 1;
+			for (int j = ib + 1; j < fb; j++)
+			{
+				if (i > fa)
+				{
+					
+					if (board[i][j] != '-')
+					{
+						allow = false;
+						break;
+					}
+					i--;
+				}
+				
+			}
+			if (allow == true)
+			{
+				return true;
+			}
+
+		}
+		else if (fa < ia && fb < ib)
+		{
+			int i = ia - 1;
+			for (int j = ib - 1; j > fb; j--)
+			{
+				if (i > fa)
+				{
+
+					if (board[i][j] != '-')
+					{
+						allow = false;
+						break;
+					}
+					i--;
+				}
+
+			}
+			if (allow == true)
+			{
+				return true;
+			}
+		}
+		else if (fa>ia && fb>ib)
+		{
+			int i = ia + 1;
+			for (int j = ib + 1; j < fb; j++)
+			{
+				if (i < fa)
+				{
+
+					if (board[i][j] != '-')
+					{
+						allow = false;
+						break;
+					}
+					i++;
+				}
+
+			}
+			if (allow == true)
+			{
+				return true;
+			}
+		}
+		else if (fa>ia && fb<ib)
+		{
+			int i = ia + 1;
+			for (int j = ib -1; j > fb; j--)
+			{
+				if (i < fa)
+				{
+
+					if (board[i][j] != '-')
+					{
+						allow = false;
+						break;
+					}
+					i++;
+				}
+
+			}
+			if (allow == true)
+			{
+				return true;
+			}
+		}
+		
+	}
+	return false;
 }
