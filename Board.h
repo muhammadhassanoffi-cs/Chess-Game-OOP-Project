@@ -18,5 +18,9 @@ public:
 	bool isrookmovelegal(char board[8][8], int ia, int ib, int fa, int fb);
 	bool isbishopmovelegal(char board[8][8], int ia, int ib, int fa, int fb);
 	bool isqueenmovelegal(char board[8][8], int ia, int ib, int fa, int fb);
-	
+	bool iskingmovelegal(int ia, int ib, int fa, int fb);
+	bool iswhite_king_incheck(char board[8][8]);
+	bool isblack_king_incheck(char board[8][8]);
+	bool iswhite_kingincheckmate();
+	bool isblack_kingincheckmate();
 };
