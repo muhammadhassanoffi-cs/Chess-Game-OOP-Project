@@ -1,4 +1,3 @@
-
 #include<iostream>
 #include"Board.h"
 #include"Pawn.h"
@@ -9,9 +8,9 @@ void Board::allocate()
 {
 	for (int i = 0; i < 8; i++)
 	{
-		for (int j = 0; j <8; j++)
+		for (int j = 0; j < 8; j++)
 		{
-			if(i==0)
+			if (i == 0)
 			{
 				board[i][j] = spieces[j];
 			}
@@ -35,19 +34,19 @@ void Board::allocate()
 }
 void Board::display()
 {
-	
-	cout << "    " << 'a' << "  " << " " <<  'b' << "   " << 'c' << "   " << 'd' << "   "<< 'e' << "   "  << 'f' << "   "  << 'g' << "   " << 'h' << endl;
+
+	cout << "    " << 'a' << "  " << " " << 'b' << "   " << 'c' << "   " << 'd' << "   " << 'e' << "   " << 'f' << "   " << 'g' << "   " << 'h' << endl;
 
 	cout << "  ---------------------------------" << endl;
 	int k = 8;
 	for (int i = 0; i < 8; i++)
 	{
-		
-		
+
+
 		cout << k << " ";
 		for (int j = 0; j < 8; j++)
 		{
-			cout << "|"  << " " << board[i][j] << " ";
+			cout << "|" << " " << board[i][j] << " ";
 
 		}
 		k--;
@@ -56,7 +55,7 @@ void Board::display()
 	}
 	cout << "  ---------------------------------" << endl;
 
-	//move();
+	
 }
 void Board::move()
 {
@@ -75,7 +74,7 @@ void Board::move()
 		cout << " Input failed try again " << endl;
 		cin.clear();
 		cin.ignore(1000, '\n');
-	/*	display();*/
+
 		return;
 	}
 	cin >> initialyaxis;
@@ -84,7 +83,7 @@ void Board::move()
 		cout << " Input failed try again " << endl;
 		cin.clear();
 		cin.ignore(1000, '\n');
-		//display();
+	
 		return;
 	}
 	bool isallowed = false;
@@ -94,38 +93,33 @@ void Board::move()
 	{
 		cout << " Selected place is out of bound! Wrong input " << endl;
 		cout << " Again input " << endl;
-	/*	display();*/
+	
 		return;
 	}
 	if (board[ia][ib] == '-')
 	{
 		cout << " NO movement available " << endl;
-	/*	display();*/
 		return;
 	}
 	char piece = board[ia][ib];
 	// WHITE TURN
-		if (turn == 1) {
-			if (!isupper(piece)) {
-				cout << "It's White's turn (choose White piece)" << endl;
-				/*display();*/
-				return;
-			}
-			isallowed = true;
+	if (turn == 1) {
+		if (!isupper(piece)) {
+			cout << "It's White's turn (choose White piece)" << endl;
+			return;
 		}
-
-	// BLACK TURN
-		else if (turn == 0) {
-			if (!islower(piece)) {
-				cout << "It's Black's turn (choose Black piece)" << endl;
-			/*	display();*/
-				return;
-			}
-			isallowed = true;
+		isallowed = true;
+	}
+	else if (turn == 0) {
+		if (!islower(piece)) {
+			cout << "It's Black's turn (choose Black piece)" << endl;
+			return;
 		}
-	if (isallowed==true)
+		isallowed = true;
+	}
+	if (isallowed == true)
 	{
-		
+
 		cout << " Enter Final position:" << endl;
 		cin >> finalx;
 
@@ -134,9 +128,8 @@ void Board::move()
 			cout << " Input failed try again " << endl;
 			cin.clear();
 			cin.ignore(1000, '\n');
-		/*	display();*/
 			return;
-			
+
 		}
 		cin >> finaly;
 		if (cin.fail())
@@ -144,29 +137,25 @@ void Board::move()
 			cout << " Input failed try again " << endl;
 			cin.clear();
 			cin.ignore(1000, '\n');
-		/*	display();*/
 			return;
 		}
 		int fa = 8 - finalx;
 		int fb = finaly - 'a';
-		
 
-		if (fa < 0 || fa >=8 || fb < 0 || fb >=8)
+
+		if (fa < 0 || fa >= 8 || fb < 0 || fb >= 8)
 		{
 			cout << " Selected place is out of bound! Wrong input " << endl;
-			/*display();*/
 			return;
 		}
 		if (islower(board[ia][ib]) && islower(board[fa][fb]))
 		{
 			cout << " Invalid move (moving to your same position)" << endl;
-		/*	display();*/
 			return;
 		}
 		if (isupper(board[ia][ib]) && isupper(board[fa][fb]))
 		{
 			cout << " Invalid move (moving to your same position)" << endl;
-			/*display();*/
 			return;
 		}
 		bool validmove = false;
@@ -174,16 +163,16 @@ void Board::move()
 		{
 			P = &pawn;
 		}
-		
+
 		if (board[ia][ib] == 'n' || board[ia][ib] == 'N')
 		{
 			P = &knight;
 		}
-		
+
 		if (board[ia][ib] == 'r' || board[ia][ib] == 'R')
 		{
 			P = &rook;
-		
+
 		}
 		if (board[ia][ib] == 'b' || board[ia][ib] == 'B')
 		{
@@ -202,30 +191,26 @@ void Board::move()
 		}
 		if (P != nullptr)
 		{
-			validmove=P->ismoveLegal( board,  ia,  ib,  fa,  fb);
+			validmove = P->ismoveLegal(board, ia, ib, fa, fb);
 		}
 		if (!validmove)
 		{
 			cout << "This movement of piece is not allowed " << endl;
-			/*display();*/
 			return;
 		}
 		if (board[fa][fb] == 'K' || board[fa][fb] == 'k')
 		{
 			cout << "King cannot be captured!" << endl;
-			/*display();*/
 			return;
 		}
 
 		char capturedPiece = board[fa][fb];
-
-		// temporary move
 		board[fa][fb] = board[ia][ib];
 		board[ia][ib] = '-';
 
 		bool illegal = false;
 
-		if (turn == 1) // White moved
+		if (turn == 1) 
 		{
 			if (iswhite_king_incheck(board))
 			{
@@ -270,7 +255,7 @@ void Board::move()
 			else if (isblack_king_incheck(board))
 			{
 				cout << "Black King is in check" << endl;
-				
+
 			}
 		}
 		else // Black just moved
@@ -286,7 +271,7 @@ void Board::move()
 				cout << "White King is in check" << endl;
 			}
 		}
-	
+
 		if (turn == 1)
 		{
 			turn = 0;
@@ -295,7 +280,7 @@ void Board::move()
 		{
 			turn = 1;
 		}
-		
+
 	}
 }
 bool Board::iswhite_king_incheck(char board[8][8])
@@ -334,7 +319,7 @@ bool Board::iswhite_king_incheck(char board[8][8])
 					{
 						return true;
 					}
-				
+
 				}
 				else if (board[i][j] == 'n')
 				{
@@ -349,7 +334,7 @@ bool Board::iswhite_king_incheck(char board[8][8])
 					{
 						return true;
 					}
-					
+
 				}
 				else if (board[i][j] == 'r')
 				{
@@ -357,7 +342,7 @@ bool Board::iswhite_king_incheck(char board[8][8])
 					{
 						return true;
 					}
-					
+
 				}
 				else if (board[i][j] == 'k')
 				{
@@ -365,15 +350,15 @@ bool Board::iswhite_king_incheck(char board[8][8])
 					{
 						return true;
 					}
-					
+
 				}
 			}
 
 		}
 	}
 
-		return false;
-	
+	return false;
+
 }
 bool Board::isblack_king_incheck(char board[8][8])
 {
@@ -448,9 +433,9 @@ bool Board::isblack_king_incheck(char board[8][8])
 
 		}
 	}
-	
-		return false;
-	
+
+	return false;
+
 }
 bool Board::iswhite_kingincheckmate()
 {
@@ -481,7 +466,7 @@ bool Board::iswhite_kingincheckmate()
 						}
 						else if (board[i][j] == 'N')
 						{
-							validmove = knight.ismoveLegal(board,i, j, fa, fb);
+							validmove = knight.ismoveLegal(board, i, j, fa, fb);
 						}
 						else if (board[i][j] == 'R')
 						{
@@ -497,7 +482,7 @@ bool Board::iswhite_kingincheckmate()
 						}
 						else if (board[i][j] == 'K')
 						{
-							validmove = king.ismoveLegal(board,i, j, fa, fb);
+							validmove = king.ismoveLegal(board, i, j, fa, fb);
 						}
 						if (!validmove)
 						{
@@ -511,7 +496,7 @@ bool Board::iswhite_kingincheckmate()
 						{
 							board[i][j] = board[fa][fb];
 							board[fa][fb] = captured;
-							// White found a move that escapes check
+						
 							return false;
 						}
 						board[i][j] = board[fa][fb];
@@ -551,7 +536,7 @@ bool Board::isblack_kingincheckmate()
 						}
 						else if (board[i][j] == 'n')
 						{
-							validmove = knight.ismoveLegal(board,i, j, fa, fb);
+							validmove = knight.ismoveLegal(board, i, j, fa, fb);
 						}
 						else if (board[i][j] == 'r')
 						{
@@ -567,7 +552,7 @@ bool Board::isblack_kingincheckmate()
 						}
 						else if (board[i][j] == 'k')
 						{
-							validmove = king.ismoveLegal(board,i, j, fa, fb);
+							validmove = king.ismoveLegal(board, i, j, fa, fb);
 						}
 						if (!validmove)
 						{
@@ -581,7 +566,7 @@ bool Board::isblack_kingincheckmate()
 						{
 							board[i][j] = board[fa][fb];
 							board[fa][fb] = captured;
-							// White found a move that escapes check
+						
 							return false;
 						}
 						board[i][j] = board[fa][fb];
@@ -592,4 +577,111 @@ bool Board::isblack_kingincheckmate()
 		}
 	}
 	return true;
+}
+// after sfml
+Board::MoveResult Board::tryMove(int ia, int ib, int fa, int fb)
+{
+	if (ia < 0 || ia >= 8 || ib < 0 || ib >= 8 || fa < 0 || fa >= 8 || fb < 0 || fb >= 8)
+		return MoveResult::Invalid;
+
+	if (board[ia][ib] == '-')
+		return MoveResult::Invalid;
+
+	char piece = board[ia][ib];
+	if (turn == 1 && !isupper(piece)) return MoveResult::Invalid;
+	if (turn == 0 && !islower(piece)) return MoveResult::Invalid;
+
+	if (islower(board[ia][ib]) && islower(board[fa][fb])) return MoveResult::Invalid;
+	if (isupper(board[ia][ib]) && isupper(board[fa][fb])) return MoveResult::Invalid;
+
+	Piece* P = nullptr;
+	if (board[ia][ib] == 'P' || board[ia][ib] == 'p') P = &pawn;
+	else if (board[ia][ib] == 'n' || board[ia][ib] == 'N') P = &knight;
+	else if (board[ia][ib] == 'r' || board[ia][ib] == 'R') P = &rook;
+	else if (board[ia][ib] == 'b' || board[ia][ib] == 'B') P = &bishop;
+	else if (board[ia][ib] == 'q' || board[ia][ib] == 'Q') P = &queen;
+	else if (board[ia][ib] == 'k' || board[ia][ib] == 'K') P = &king;
+
+	bool validmove = (P != nullptr) ? P->ismoveLegal(board, ia, ib, fa, fb) : false;
+	if (!validmove) return MoveResult::Invalid;
+
+	if (board[fa][fb] == 'K' || board[fa][fb] == 'k') return MoveResult::Invalid;
+
+	char capturedPiece = board[fa][fb];
+	board[fa][fb] = board[ia][ib];
+	board[ia][ib] = '-';
+
+	bool illegal = false;
+	if (turn == 1) { if (iswhite_king_incheck(board)) illegal = true; }
+	else { if (isblack_king_incheck(board)) illegal = true; }
+
+	if (illegal)
+	{
+		board[ia][ib] = board[fa][fb];
+		board[fa][fb] = capturedPiece;
+		return MoveResult::Invalid;
+	}
+
+	if (board[fa][fb] == 'P' && fa == 0)
+	{
+		pendingPromoRow = fa; pendingPromoCol = fb; pendingPromoIsWhite = true;
+		return MoveResult::NeedsPromotion;
+	}
+	if (board[fa][fb] == 'p' && fa == 7)
+	{
+		pendingPromoRow = fa; pendingPromoCol = fb; pendingPromoIsWhite = false;
+		return MoveResult::NeedsPromotion;
+	}
+
+	MoveResult result = MoveResult::Success;
+
+	if (turn == 1)
+	{
+		if (isblack_kingincheckmate()) { gameOver = true; result = MoveResult::Checkmate; }
+		else if (isblack_king_incheck(board)) result = MoveResult::Check;
+	}
+	else
+	{
+		if (iswhite_kingincheckmate()) { gameOver = true; result = MoveResult::Checkmate; }
+		else if (iswhite_king_incheck(board)) result = MoveResult::Check;
+	}
+
+	turn = (turn == 1) ? 0 : 1;
+	return result;
+}
+
+Board::MoveResult Board::finishPromotion(char pieceLetter)
+{
+	if (pendingPromoRow == -1) return MoveResult::Invalid; // nothing pending
+
+	char upper = toupper(pieceLetter);
+	char finalPiece;
+	switch (upper)
+	{
+	case 'Q': finalPiece = pendingPromoIsWhite ? 'Q' : 'q'; break;
+	case 'R': finalPiece = pendingPromoIsWhite ? 'R' : 'r'; break;
+	case 'B': finalPiece = pendingPromoIsWhite ? 'B' : 'b'; break;
+	case 'N': finalPiece = pendingPromoIsWhite ? 'N' : 'n'; break;
+	default:  finalPiece = pendingPromoIsWhite ? 'Q' : 'q'; break;
+	}
+
+	board[pendingPromoRow][pendingPromoCol] = finalPiece;
+	bool wasWhite = pendingPromoIsWhite;
+	pendingPromoRow = pendingPromoCol = -1;
+
+	MoveResult result = MoveResult::Success;
+
+	if (wasWhite) 
+	{
+		if (isblack_kingincheckmate()) { gameOver = true; result = MoveResult::Checkmate; }
+		else if (isblack_king_incheck(board)) result = MoveResult::Check;
+	}
+	else 
+	{
+		if (iswhite_kingincheckmate()) { gameOver = true; result = MoveResult::Checkmate; }
+		else if (iswhite_king_incheck(board)) result = MoveResult::Check;
+	}
+
+	turn = wasWhite ? 0 : 1;
+	return result;
 }

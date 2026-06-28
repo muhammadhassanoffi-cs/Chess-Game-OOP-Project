@@ -76,7 +76,7 @@ void Pawn::pawnpromotion(char board[8][8], char piece, int fa, int fb)
 			{
 				cin.clear();
 				cin.ignore(1000, '\n');
-				choice = ' '; // forces another loop iteration
+				choice = ' '; 
 			}
 		} while (choice != 'Q' &&
 			choice != 'R' &&
@@ -112,7 +112,7 @@ void Pawn::pawnpromotion(char board[8][8], char piece, int fa, int fb)
 			{
 				cin.clear();
 				cin.ignore(1000, '\n');
-				choice = ' '; // forces another loop iteration
+				choice = ' '; 
 			}
 		} while (choice != 'q' &&
 			choice != 'r' &&

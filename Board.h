@@ -35,6 +35,14 @@ public:
 	bool gameOver = false;
 	bool isGameOver()
 	{ return gameOver; }
+	// after sfml
+	enum class MoveResult { Success, Check, Checkmate, Invalid, NeedsPromotion };
+	MoveResult tryMove(int ia, int ib, int fa, int fb);
+	MoveResult finishPromotion(char pieceLetter); 
+private:
+	int pendingPromoRow = -1, pendingPromoCol = -1;
+	bool pendingPromoIsWhite = true;
+public:
 
 	
 	
