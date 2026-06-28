@@ -83,7 +83,7 @@ void GameScreen::run(sf::RenderWindow& window, Board& board, int boardColorTheme
 
     sf::Sound moveSound, promoteSound, winSound;
     if (hasMoveSound) { moveSound.setBuffer(moveBuffer);       moveSound.setVolume(20.f); }    // 0-100, quiet tap
-    if (hasPromoteSound) { promoteSound.setBuffer(promoteBuffer); promoteSound.setVolume(75.f); }  // a bit more noticeable
+    if (hasPromoteSound) { promoteSound.setBuffer(promoteBuffer); promoteSound.setVolume(80.f); }  // a bit more noticeable
     if (hasWinSound) { winSound.setBuffer(winBuffer);         winSound.setVolume(30.f); }      // loudest - it's the big moment
 
     int selectedRow = -1, selectedCol = -1;

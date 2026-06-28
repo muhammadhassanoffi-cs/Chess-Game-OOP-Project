@@ -109,7 +109,7 @@ MenuResult Menu::show(sf::RenderWindow& window, int& boardColorTheme)
     float winW = (float)window.getSize().x;
     float winH = (float)window.getSize().y;
     sf::Texture bgTexture;
-    bool hasBgImage = bgTexture.loadFromFile("images/background7.jpg"); 
+    bool hasBgImage = bgTexture.loadFromFile("images/background9.png"); 
     sf::Sprite bgSprite;
     if (hasBgImage)
     {

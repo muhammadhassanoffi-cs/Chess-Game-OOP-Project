@@ -10,7 +10,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 840), "Chess",
         sf::Style::Titlebar | sf::Style::Close);
 
-    int boardColorTheme = 0; /
+    int boardColorTheme = 0; 
 
     while (window.isOpen())
     {
